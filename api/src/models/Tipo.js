@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             unique: true,
             allowNull: true,
-            prymarikey: true
+            primaryKey: true
         },
         
         name: {

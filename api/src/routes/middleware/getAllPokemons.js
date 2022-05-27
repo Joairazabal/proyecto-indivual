@@ -66,4 +66,32 @@ const getAllPokemon = async () => {
   return dbPlusApi;
 };
 
- module.exports= {getAllPokemon}
+// const pokeTypes= async()=>{
+//   const tipos= await getAllPokemon()
+//   const allTypes= await tipos.map((t)=>t.type)
+//   return allTypes
+// }
+
+const pokeTypes= async()=>{
+  const typesUrl = await axios.get('https://pokeapi.co/api/v2/type')
+  const allTypes= await typesUrl.data.results.map((e)=>e.name)
+  allTypes.forEach(tipo => { Tipo.findOrCreate({
+    where:{
+      name:tipo
+    }
+  })
+    
+  });
+}
+const getTypesDb= async()=>{
+  await pokeTypes();
+  try {
+    const pokemonTypes= await Tipo.findAll()
+    return pokemonTypes
+  } catch (e) {
+  throw new Error("Server Error")
+  }
+}
+
+
+ module.exports= {getAllPokemon, getTypesDb}
