@@ -1,20 +1,22 @@
 import React from "react";
-import getPokemons from "../actions";
-export default function Paginado({pokemonsPerPage, allPokemons, paginado}){
-const pagNumbers= [];
-for(let i =0; i < Math.ceil(allPokemons/pokemonsPerPage);i++){
-    pagNumbers.push(i+1)
-}
-return(
-    <nav>
-        <ul>
-            { pagNumbers && pagNumbers.map((number) =>{
-                <li className="numberPages" key={number}>
-                <a onClick={()=> paginado(number)}>{number}</a>
-            </li>
-           
+// me traigo las props como parametro desde el otro componente
+export default function Paginado({ pokemonsPerPage, allPokemons, paginado }) {
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(allPokemons / pokemonsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+    return (
+      <nav>
+        <ul className='paginado' >
+          {pageNumbers &&
+            pageNumbers.map(number => {
+               return <li>
+             <button onClick={() => paginado(number)}>
+               {number}
+                </button>
+              </li>
             })}
         </ul>
-    </nav>
-)
-}
+      </nav>
+    );
+  }

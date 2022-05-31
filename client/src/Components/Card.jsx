@@ -1,10 +1,20 @@
 import React from "react";
 
 
-export function Card(name, img,type){
+export default function Card({ name, img, type }) {
+    return(
+  <div>
     <div>
-        <h2>{name}</h2>
-        <img src={img} alt="img not found" width="50px" height="80px"  />
-        {type.map((el)=>(<h2>{el.type.name}</h2>))}
+      <h2>{name}</h2>
     </div>
+    <div>
+      <img src={img} alt="imagen" className="img" width="300px" height="200px" />
+    </div>
+    <div>
+      {type.map(el => (
+        <h2>{el.type.name}</h2>
+      ))}
+    </div>
+  </div>
+  )
 } 
