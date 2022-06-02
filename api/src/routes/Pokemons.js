@@ -13,21 +13,22 @@ const router = Router();
 router.get('/', async(req, res) => {
     const { name } = req.query;
     try {
-        const response = await getAllPokemon();
-        if (name) {
-            const pokemonName = await response.filter((el) =>
-                el.name.toLowerCase().includes(name.toLowerCase())
-            );
-            pokemonName.length ?
-                res.status(200).send(pokemonName) :
-                res.status(404).send('No existe un pokemon con ese nombre');
-        } else {
-            res.status(200).send(response);
-        }
-    } catch (e) {
-        res.status(400).send('Server error');
+      //Recibo la request en una variable
+      let pokemonsTotal = await getAllPokemon(); //Guardo mi controlador que trae todos los pokemons en una variable..
+      if (name) { //Consulto si me pasan un nombre y lo busco en la variable de arriba
+        let pokemonName = await pokemonsTotal.filter((el) => 
+          el.name.toLowerCase().includes(name.toLowerCase())
+        );
+        pokemonName.length
+          ? res.status(200).send(pokemonName) // Si lo encuentro lo devuelvo,
+          : res.status(404).send("El pokemon ingresado no existe"); // y sino devuelvo el texto.
+      } else {
+        res.status(200).send(pokemonsTotal); //Sino devuelvo todos los pokemons
+      }
+    } catch (error) {
+    console.log(error)
     }
-});
+  });
 
 
 router.get('/:idPokemon', async(req, res) => {
@@ -47,7 +48,7 @@ router.get('/:idPokemon', async(req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const { name, hp, attack, defense, speed, height, weight, tipo } = req.body;
+    const { name, hp, attack, defense, speed, height, weight, type } = req.body;
     try {
       let newPokemon = await Pokemon.create({
         name,
@@ -58,15 +59,14 @@ router.post('/', async (req, res) => {
         height,
         weight,
       });
-      if (Array.isArray(tipo)) {
-        for (let i = 0; i < tipo.length; i++) {
-          let tipoDb = await Tipo.findOne({ where: { name: tipo[i] } });
-          newPokemon.addTipo(tipoDb);
-        }
-      } else {
-        newPokemon.addTipo(await Tipo.findOne({ where: { name: tipo } }));
+      try {
+        //tipo.forEach(async (type) => {
+        let matchTypes = await Tipo.findAll({ where: { name: type } });
+        newPokemon.addTipo(matchTypes);
+        // });
+      } catch (error) {
+        next(error);
       }
-  
       res.send('Se creo un pokemon');
     } catch (e) {
       res.status(404).send('Server error');

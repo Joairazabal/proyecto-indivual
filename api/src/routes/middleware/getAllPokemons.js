@@ -36,7 +36,7 @@ const getApiData = async () => {
           height: pokemon.data.height,
           weight: pokemon.data.weight,
           img: pokemon.data.sprites.front_default,
-          type: pokemon.data.types,
+          type: pokemon.data.types.map((t) => t.type.name),
         };
       })
     );
@@ -48,7 +48,7 @@ const getApiData = async () => {
 
 const getDbData = async () => {
   const info = await Pokemon.findAll({
-    includes: {
+    include: {
       model: Tipo,
       attributes: ['name'],
       through: {
@@ -56,7 +56,25 @@ const getDbData = async () => {
       },
     },
   });
-  return info;
+  const pokemons = info.map((obj) => {
+    return {
+      name: obj.name,
+      hp: obj.hp,
+      attack: obj.attack,
+      defense: obj.defense,
+      img: obj.img,
+      speed: obj.speed,
+      createdInDb: obj.createdInDb,
+      id: obj.id,
+      height: obj.height,
+      weight: obj.weight,
+      type: obj.tipos.map((el) => el.name),
+    };
+  });
+  // console.log(info, ' L78');
+  // //
+
+  return pokemons;
 };
 
 const getAllPokemon = async () => {

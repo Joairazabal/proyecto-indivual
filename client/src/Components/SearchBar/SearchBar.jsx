@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import {useDispatch} from 'react-redux'
-import {getPokemonsName} from '../actions/index'
+import {getPokemonsName} from '../../redux/actions'
 export default function SearchPokemon(){
     const dispatch= useDispatch();
     const [name,setName] = useState("");
@@ -15,7 +15,7 @@ export default function SearchPokemon(){
     e.preventDefault();
     dispatch(getPokemonsName(name))
   }
-
+console.log(name)
   return (
     <div>
       <input

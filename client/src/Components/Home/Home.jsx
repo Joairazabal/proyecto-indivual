@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getPokemons from "../../actions";
-import { getTypes } from "../../actions";
+import getPokemons from "../../redux/actions";
+import { filterPokemonsByType, createFilterPokemon,Sort, filterByAttack } from "../../redux/actions";
+import getTypes from "../../redux/actions"
 import { Link } from "react-router-dom";
-import Card from "../Card";
-import Paginado from "../Paginado";
-import SearchPokemon from "../SearchBar";
+import Card from "../Card/Card";
+import Paginado from "../Paginado/Paginado";
+import SearchPokemon from "../SearchBar/SearchBar";
 
 export default function Home() {
   //nos guardamos el hook en dispatch para ir despachando las acciones
@@ -14,14 +15,12 @@ export default function Home() {
   //con useUselector nos traemos todo lo que esta en el estado de pokemons
   const allPokemons = useSelector(state => state.pokemons);
   const types = useSelector(state => state.types);
+  const[order,setOrder]= useState('')
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsPerPage] = useState(12);
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = allPokemons.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
-  );
+  const currentPokemons = allPokemons.slice(indexOfFirstPokemon,indexOfLastPokemon);
 
   const paginado = pageNumber => {
     setCurrentPage(pageNumber);
@@ -36,6 +35,26 @@ export default function Home() {
     e.preventDefault();
     dispatch(getPokemons());
   }
+
+  function handleFilterType(e) {
+    dispatch(filterPokemonsByType(e.target.value));
+  }
+
+  function handleFilterCreate(e){
+    dispatch(createFilterPokemon(e.target.value))
+  }
+  function onSelectsChange(e) {
+    e.preventDefault();
+    dispatch(Sort(e.target.value));
+    setCurrentPage(1);
+    setOrder(`Ordenado ${e.target.value} `)
+  }
+  function handleFilterByAttack(e){
+    dispatch(filterByAttack(e.target.value));
+    setCurrentPage(1);
+    setOrder(`Ordenado ${e.target.value} `)
+  }
+
 
   return (
     <div>
@@ -52,25 +71,40 @@ export default function Home() {
       </button>
       <div>
         <h2>Order</h2>
-        <select>
-          <option value="asd">Z-A</option>
-          <option value="desc">A-Z</option>
+        <select onChange={e => onSelectsChange(e)} >
+        <option> A-Z:</option>
+            <option value="ASCENDENTE">Ascendente</option>
+            <option value="DESCENDENTE">Descendente</option>
         </select>
+        <select onChange={e => handleFilterByAttack(e)}>
+            <option value="" selected disabled>By attack</option>
+            <option value="Mayor fuerza">Mayor fuerza</option>
+            <option value="Menor fuerza">Menor fuerza</option>
+          </select>
 
         <h2>Filter</h2>
 
-        <select>
-          <option value="asd">Only my Pokemons</option>
-          <option value="desc">Only Originals</option>
+        <select onChange={e => handleFilterCreate(e)}>
+          <option value="" selected disabled></option>
+          <option value='All'>All</option>
+          <option value="created">Only my Pokemons</option>
+          <option value="original">Only Originals</option>
         </select>
 
-        <select name="" id="">
-          <option>Elegi el Tipo</option>
-
-          {types?.map(el => (
-            <option value={el.name}>{el.name}</option>
-          ))}
-        </select>
+        <select  onChange={e => handleFilterType(e)}>
+        <option value="" selected disabled>By types</option>
+          <option value="All"> All</option>
+          <option value="normal"> Normal </option>
+          <option value="flying"> Flying </option>
+          <option value="poison"> Poison </option>
+          <option value="ground"> Ground </option>
+          <option value="bug"> Bug </option>
+          <option value="fire"> Fire </option>
+          <option value="water"> Water </option>
+          <option value="grass"> Grass </option>
+          <option value="electric"> Electric </option>
+          <option value="fairy"> Fairy </option>
+          </select>
 
         <Paginado
           pokemonsPerPage={pokemonsPerPage}

@@ -12,7 +12,7 @@ export default function Card({ name, img, type }) {
     </div>
     <div>
       {type.map(el => (
-        <h2>{el.type.name}</h2>
+        <h2>{el}</h2>
       ))}
     </div>
   </div>
