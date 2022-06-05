@@ -1,20 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import'./Card.css'
 
+export default function Card({ name, img, type,id }) {
+  return(
+<div className="container">
+<Link to={`/home/${id}`}>
+<h2 className="name">{name}</h2>
+</Link> 
+<img src={img} alt="imagen" className="img" width="100px" height="100px" />
+ 
+  <div className="typeStyle">{type.map(el => (
+    <h2>{el}</h2>
+    ))}
+</div>
 
-export default function Card({ name, img, type }) {
-    return(
-  <div>
-    <div>
-      <h2>{name}</h2>
-    </div>
-    <div>
-      <img src={img} alt="imagen" className="img" width="300px" height="200px" />
-    </div>
-    <div>
-      {type.map(el => (
-        <h2>{el}</h2>
-      ))}
-    </div>
-  </div>
-  )
+</div>
+)
 } 

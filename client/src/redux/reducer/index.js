@@ -5,13 +5,13 @@ import { FILTER_BY_TYPE } from "../actions"
 import { CREATE_FILTER } from "../actions"
 import { SORT } from "../actions"
 import {FILTER_BY_ATTACK} from "../actions"
+import  {GET_DETAILS} from "../actions"
 
 const initialState = {
     pokemons: [],
     allTypes: [],
     allPokemons: [],
-
-    
+    allDetail:[],
 }
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -84,13 +84,15 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     pokemons: orderedByAttack
                 }
-                
-                case 'POST_POKEMONS':
-                    return{
-                        ...state,
-                        
-                    }
+    
 
+                    case GET_DETAILS:
+                        return {
+                          ...state,
+                          allDetail: action.payload,
+                        };
+                    
+                 
         default:
             return {...state }
     }

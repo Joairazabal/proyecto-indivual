@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {Link,useNavigate} from 'react-router-dom';
 import { postPokemon,getTypes } from "../../redux/actions";
 import { useDispatch,useSelector } from 'react-redux';
-
+import NavBar from "../NavBar/NavBar";
 function validate({
     name,
     hp,
@@ -196,9 +196,7 @@ export default function PokemonCreate(){
     //CHECKEAR QUE SEAN INTEGER
     return (
         <div>
-            <Link to='/home'>
-                <button>Go back</button>
-            </Link>
+        <NavBar/>
             <h1>Create your own pokemon!</h1>
         <form onSubmit={e=>handleSubmit(e)}>
             <div>

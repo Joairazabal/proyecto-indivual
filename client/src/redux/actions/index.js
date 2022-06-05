@@ -8,6 +8,7 @@ export const FILTER_BY_TYPE= "FILTER_BY_TYPE"
 export const CREATE_FILTER= 'CREATE_FILTER'
 export const SORT = "SORT"
 export const FILTER_BY_ATTACK= 'FILTER_BY_ATTACK'
+export const  GET_DETAILS=  "GET_DETAILS"
 
 export default function getPokemons(){
     return async function(dispatch){
@@ -76,4 +77,22 @@ export function filterByAttack(payload){
           return json
       }
     }
-
+    export const detail = (id) => {
+      return async function (dispatch) {
+        try {
+          let pokeId = await axios.get(`http://localhost:3001/pokemons/${id}`);
+          return dispatch({
+            type: GET_DETAILS,
+            payload: pokeId.data,
+           
+          });
+          console.log(detail)
+  
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    };
+       
+  
+  

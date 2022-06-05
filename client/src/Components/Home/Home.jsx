@@ -7,7 +7,12 @@ import getTypes from "../../redux/actions"
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
-import SearchPokemon from "../SearchBar/SearchBar";
+import NavBar from "../NavBar/NavBar";
+import './Home.css'
+import back from '../../build/peakpx.jpg'
+
+import './Home.css'
+
 
 export default function Home() {
   //nos guardamos el hook en dispatch para ir despachando las acciones
@@ -57,20 +62,12 @@ export default function Home() {
 
 
   return (
-    <div>
-      <h1>Pokemons</h1>
-      <>
-        <SearchPokemon />
-      </>
-      <button
-        onClick={e => {
-          handleClick(e);
-        }}
-      >
-        volver a cargar los personajes
-      </button>
-      <div>
-        <h2>Order</h2>
+    
+    <div className="containn">
+     <NavBar/>
+     {/* <img className="back" src={back} alt="" />  */}
+   <div className="order">
+   <h2>Order</h2>
         <select onChange={e => onSelectsChange(e)} >
         <option> A-Z:</option>
             <option value="ASCENDENTE">Ascendente</option>
@@ -113,13 +110,15 @@ export default function Home() {
         />
       </div>
 
+      <div className="cards">
       {currentPokemons?.map(el => {
         return (
           <>
-            <Card name={el.name} img={el.img} type={el.type} key={el.id} />
+            <Card name={el.name} img={el.img} type={el.type} key={el.id} id={el.id} />
           </>
         );
       })}
+      </div>
     </div>
   );
 }
