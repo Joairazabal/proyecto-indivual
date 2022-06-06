@@ -1,0 +1,37 @@
+.search{
+    background: transparent;
+    border-radius: 7px;
+    border: 4px;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+.boton {
+    border: none;
+    font-family: sans-serif;
+ 
+    background: transparent;
+    color: #fff;
+    border: solid 1px rgba(152, 157, 160, 0.2);
+    padding: 5px;
+    border-radius: 4px;
+    transition-duration: 0.2s;
+   }
+   
+   .boton:before {
+    content: "»";
+    opacity: 0;
+    margin-left: -15px;
+    transition-duration: 0.2s;
+   }
+   
+   .botonn:hover:before {
+    margin-left: 0px;
+    opacity: 1;
+   }
+   
+   .boton:hover {
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.02);
+    border: solid 1px #FFF;
+   }

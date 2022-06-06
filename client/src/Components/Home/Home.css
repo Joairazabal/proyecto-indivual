@@ -1,18 +1,36 @@
-/* *{
+*{
     padding: 0;
-    margin: 0;
-}
-.back{
-background-size: cover;
-background-attachment: fixed;
-
-
-
-} */
-/* .order{
-    position: relative;
+    margin: 0; 
 }
 .cards{
-    position: relative;
+    justify-self: start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
 }
- */
+.order{
+    display: flex;
+    justify-content: space-around;
+
+}
+.containn{
+    background-image: url('https://initiate.alphacoders.com/images/115/cropped-1920-1080-1159891.jpg?3114');
+    background-size: cover;
+    width: 100vw;
+
+    background-attachment: fixed;
+    background-position: center;
+}
+.order select{
+    background: transparent;
+    border-radius: 7px;
+    margin: 0;
+    padding: 0;
+}
+.containn{
+    width: 100vw;
+}
+.types{
+padding-right: 2rem;
+}

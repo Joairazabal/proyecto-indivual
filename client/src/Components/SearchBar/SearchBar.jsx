@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import {useDispatch} from 'react-redux'
 import {getPokemonsName} from '../../redux/actions'
+import './Search.css'
 export default function SearchPokemon(){
     const dispatch= useDispatch();
     const [name,setName] = useState("");
@@ -17,7 +18,7 @@ export default function SearchPokemon(){
   }
 console.log(name)
   return (
-    <div>
+    <div className="contains">
       <input
         className="search"type="text"
         onChange= {(e) => handleInputChange(e)}

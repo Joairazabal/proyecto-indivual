@@ -65,7 +65,7 @@ export default function Home() {
     
     <div className="containn">
      <NavBar/>
-     {/* <img className="back" src={back} alt="" />  */}
+  
    <div className="order">
    <h2>Order</h2>
         <select onChange={e => onSelectsChange(e)} >
@@ -82,14 +82,14 @@ export default function Home() {
         <h2>Filter</h2>
 
         <select onChange={e => handleFilterCreate(e)}>
-          <option value="" selected disabled></option>
+          <option value="" selected disabled>pokemons</option>
           <option value='All'>All</option>
           <option value="created">Only my Pokemons</option>
           <option value="original">Only Originals</option>
         </select>
 
         <select  onChange={e => handleFilterType(e)}>
-        <option value="" selected disabled>By types</option>
+        <option value="" selected disabled className="">By types</option>
           <option value="All"> All</option>
           <option value="normal"> Normal </option>
           <option value="flying"> Flying </option>
@@ -102,12 +102,6 @@ export default function Home() {
           <option value="electric"> Electric </option>
           <option value="fairy"> Fairy </option>
           </select>
-
-        <Paginado
-          pokemonsPerPage={pokemonsPerPage}
-          allPokemons={allPokemons.length}
-          paginado={paginado}
-        />
       </div>
 
       <div className="cards">
@@ -119,6 +113,13 @@ export default function Home() {
         );
       })}
       </div>
+      <div>
+      <Paginado
+          pokemonsPerPage={pokemonsPerPage}
+          allPokemons={allPokemons.length}
+          paginado={paginado}
+        />
+        </div>
     </div>
   );
 }
