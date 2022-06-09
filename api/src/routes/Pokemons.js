@@ -3,6 +3,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const { getAllPokemon} = require('./middleware/getAllPokemons')
 const { getById } = require('./middleware/idPokemons')
+const {getByName} = require('./middleware/namePokemons')
 const {Pokemon, Tipo} = require('../db');
 const router = Router();
 
@@ -10,25 +11,41 @@ const router = Router();
 // [ ] GET /pokemons:
 // Obtener un listado de los pokemons desde pokeapi.
 // Debe devolver solo los datos necesarios para la ruta principal
-router.get('/', async(req, res) => {
-    const { name } = req.query;
-    try {
-      //Recibo la request en una variable
-      let pokemonsTotal = await getAllPokemon(); //Guardo mi controlador que trae todos los pokemons en una variable..
-      if (name) { //Consulto si me pasan un nombre y lo busco en la variable de arriba
-        let pokemonName = await pokemonsTotal.filter((el) => 
-          el.name.toLowerCase().includes(name.toLowerCase())
-        );
-        pokemonName.length
-          ? res.status(200).send(pokemonName) // Si lo encuentro lo devuelvo,
-          : res.status(404).send("El pokemon ingresado no existe"); // y sino devuelvo el texto.
-      } else {
-        res.status(200).send(pokemonsTotal); //Sino devuelvo todos los pokemons
-      }
-    } catch (error) {
-    console.log(error)
+// router.get('/', async(req, res) => {
+//     const { name } = req.query;
+//     try {
+//       //Recibo la request en una variable
+//       let pokemonsTotal = await getAllPokemon(); //Guardo mi controlador que trae todos los pokemons en una variable..
+//       if (name) { //Consulto si me pasan un nombre y lo busco en la variable de arriba
+//         let pokemonName = await pokemonsTotal.filter((el) => 
+//           el.name.toLowerCase().includes(name.toLowerCase())
+//         );
+//         pokemonName.length
+//           ? res.status(200).send(pokemonName) // Si lo encuentro lo devuelvo,
+//           : res.status(404).send("El pokemon ingresado no existe"); // y sino devuelvo el texto.
+//       } else {
+//         res.status(200).send(pokemonsTotal); //Sino devuelvo todos los pokemons
+//       }
+//     } catch (error) {
+//     console.log(error)
+//     }
+//   });
+router.get('/', async (req, res, next) => {
+  const { name } = req.query;
+  try {
+    const response = await getAllPokemon();
+    if (name) {
+      const responseName = await getByName(name);
+      console.log(responseName);
+      res.status(200).send(responseName);
+    } else {
+      res.status(200).json(response);
     }
-  });
+  } catch (e) {
+    next(e);
+    res.status(400).send('Server error');
+  }
+});
 
 
 router.get('/:idPokemon', async(req, res) => {
@@ -48,7 +65,7 @@ router.get('/:idPokemon', async(req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const { name, hp, attack, defense, speed, height, weight, type } = req.body;
+    const { name, hp, attack, defense, speed, height, weight, type, img } = req.body;
     try {
       let newPokemon = await Pokemon.create({
         name,
@@ -58,6 +75,7 @@ router.post('/', async (req, res) => {
         speed,
         height,
         weight,
+        img,
       });
       try {
         //tipo.forEach(async (type) => {
@@ -73,6 +91,9 @@ router.post('/', async (req, res) => {
       console.log(e);
     }
   });
+  // router.delete('/pokemosDelete/:id', async(req,res, next)=>{
+  //   const id=
+  // })
 
 module.exports = router
 

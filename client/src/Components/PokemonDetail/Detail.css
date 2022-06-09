@@ -1,0 +1,83 @@
+
+.detail{
+background-image: url('https://wallpapercave.com/wp/DuJYS2V.jpg');
+height: 100vh;
+width: 100%;
+overflow: auto;
+display: flex;
+flex-direction: column;
+background-size: cover;
+justify-content: center;
+align-items: center;
+margin: 0;
+padding: 0;
+
+}
+.box{
+    padding-top: 0;
+    margin: 15px;
+    width: 50rem;
+    height: 30rem;
+    border-radius: 30px;
+    background: #212121;
+    box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                -15px -15px 30px rgb(60, 60, 60);
+    
+    
+}
+.box .name {
+    display: flex;
+    right: 0%;
+    color: #fff;
+}
+.detalles span{
+    color: #fff;
+    display: flex;
+    text-align: center;
+    font-size: 2em;
+    padding-left:4em; 
+    padding-bottom: 0;
+    padding-top: 0.5rem;
+
+}
+.inBox{
+    display: flex;
+    right: 0;
+}
+
+.detalles .hp{
+    padding-top: 1rem;
+}
+.box .id{
+display: flex;
+ font-size: 2em;
+padding-left:4.5em;
+padding-top: 2em;
+padding-bottom: 0;
+color: #fff;
+}
+ .containTypes{
+  display: flex;
+}
+
+.box .pk{
+    height: 300px;
+    padding: 2rem 0 0 2rem ;
+    margin: 0;
+}
+.box h1{
+    font-size: 2em;
+    padding: 1rem 0 0 10rem;
+}
+
+.types{
+    /* padding-top: 5rem; */
+   font-size: 2em;
+    color: #fff;
+    padding: 1rem 1rem 0 6rem 
+
+}
+.body_create{
+    height: 100vh;
+    width: 100%;
+}

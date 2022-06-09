@@ -1,9 +1,31 @@
 const axios = require('axios');
+const {Pokemon,Tipo}= require('../../db')
 
 const getById= async(id)=>{
+  
  try{
-if(id){
+  if (typeof id === 'string' && id.length > 6) {
+    const db = await Pokemon.findByPk(id, { include: Tipo });
+    const pokemonDb = {
+      id: db.id,
+      name: db.name,
+      type: db.tipos.map((t) => t.name),
+      img: db.img
+        ? db.img
+        : 'https://media.giphy.com/media/DRfu7BT8ZK1uo/giphy.gif',
+      hp: db.hp,
+      attack: db.attack,
+      defense: db.defense,
+      speed: db.speed,
+      height: db.height,
+      weight: db.weight,
+    };
+
+    return pokemonDb;
+  }
+
   const pokemon= await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  
   return {
     id: pokemon.data.id,
     name: pokemon.data.name,
@@ -13,13 +35,9 @@ if(id){
     speed: pokemon.data.stats[5].base_stat,
     height: pokemon.data.height,
     weight: pokemon.data.weight,
-    img: pokemon.data.sprites.front_default,
-    type: pokemon.data.types,
+    img: pokemon.data.sprites.other.dream_world.front_default,
+    type: pokemon.data.types.map((t) => t.type.name),
   };
-    
-}else{
-    throw new Error('No se encontro un pokemon con ese id')
-}
  }catch(e){
     res.status(400).send('Server error');  
  }

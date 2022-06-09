@@ -1,6 +1,6 @@
-/* From uiverse.io by @Tiagoadag */
+
 .container {
-    background: rgba(75, 76, 72, 0.248);
+    background: rgba(21, 21, 19, 0.248);
     margin: 15px;
     width: 17rem;
     border-radius: 10px;
@@ -18,7 +18,8 @@
 }
   .container:hover {
     box-shadow: 20px 20px 20px rgb(0, 0, 0, 0, 4);
-    transform: translateY(-3%);
+    transform: translateY(-10%);
+    
   }
   
   .name {
@@ -44,4 +45,9 @@
   }
   .typeStyle h2{
     padding-left: 5px;
+  }
+  .imagen{
+    display:flex;
+    padding-left: 5rem;
+
   }

@@ -35,7 +35,7 @@ const getApiData = async () => {
           speed: pokemon.data.stats[5].base_stat,
           height: pokemon.data.height,
           weight: pokemon.data.weight,
-          img: pokemon.data.sprites.front_default,
+          img: pokemon.data.sprites.other.dream_world.front_default,
           type: pokemon.data.types.map((t) => t.type.name),
         };
       })
@@ -47,16 +47,54 @@ const getApiData = async () => {
 };
 
 const getDbData = async () => {
-  const info = await Pokemon.findAll({
+  // const info = await Pokemon.findAll({
+  //   include: {
+  //     model: Tipo,
+  //     attributes: ['name'],
+  //     through: {
+  //       attributes: [],
+  //     },
+  //   },
+  // });
+  
+  // const pokemons = info.map((obj) => {
+  //   return {
+  //     name: obj.name,
+  //     hp: obj.hp,
+  //     attack: obj.attack,
+  //     defense: obj.defense,
+  //     img: obj.img,
+  //     speed: obj.speed,
+  //     createdInDb: obj.createdInDb,
+  //     id: obj.id,
+  //     height: obj.height,
+  //     weight: obj.weight,
+  //     type: obj.tipos.map((el) => el.name),
+  //   };
+  // });
+  // console.log(info, ' L78');
+  // //
+
+//   return pokemons;
+try {
+  const pokemons = await Pokemon.findAll({
     include: {
+      //Incluime el model Tipo
       model: Tipo,
+      //TRAEME EL ATRIBUTO NAME
       attributes: ['name'],
+      //MEDIANTE LOS ATRIBUTOS, VA SIEMPRE, BUENA PRACTICA
       through: {
         attributes: [],
       },
     },
   });
-  const pokemons = info.map((obj) => {
+  // console.log(
+  //   pokemons[0].tipos.map((el) => el.name),
+  //   ' LINEA 60 GETALLPOKEMONS'
+  // );
+  console.log(pokemons);
+  const info = pokemons.map((obj) => {
     return {
       name: obj.name,
       hp: obj.hp,
@@ -68,14 +106,15 @@ const getDbData = async () => {
       id: obj.id,
       height: obj.height,
       weight: obj.weight,
-      type: obj.tipos.map((el) => el.name),
+      type: obj.tipos?.map((el) => el.name),
     };
   });
-  // console.log(info, ' L78');
-  // //
-
-  return pokemons;
-};
+  console.log(info, ' L78');
+  return info;
+} catch (error) {
+  console.log(error, ' LINEA 83 GETALLPOKEMONS');
+}
+ };
 
 const getAllPokemon = async () => {
   const apiData = await getApiData();

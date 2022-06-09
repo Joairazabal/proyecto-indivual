@@ -14,7 +14,7 @@ if(name){
     height: pokemon.data.height,
     weight: pokemon.data.weight,
     img: pokemon.data.sprites.front_default,
-    type: pokemon.data.types,
+    type: pokemon.data.types.map((t) => t.type.name),
   };
     
 }else{

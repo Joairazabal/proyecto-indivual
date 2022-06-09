@@ -22,9 +22,9 @@ console.log(name)
       <input
         className="search"type="text"
         onChange= {(e) => handleInputChange(e)}
-        placeholder="Buscar pokemon..."
+        placeholder="Search pokemon..."
       />
-      <button className ="boton" type="submit" onClick= {(e) => handleSubmit(e)}> Buscar </button>
+      <button className ="boton" type="submit" onClick= {(e) => handleSubmit(e)}>Search</button>
     </div>
   );
 }

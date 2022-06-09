@@ -12,13 +12,15 @@ const initialState = {
     allTypes: [],
     allPokemons: [],
     allDetail:[],
+    detail: [],
+
 }
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_POKEMONS:
             return {
                 ...state,
-                pokemons: action.payload,
+                pokemons: action.payload, 
                 allPokemons: action.payload,
             }
         case GET_TYPES:
@@ -29,7 +31,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_POKEMONS_NAME:
             return {
                 ...state,
-                pokemons: action.payload
+                pokemons: [action.payload]
             };
          
         case FILTER_BY_TYPE:
@@ -56,9 +58,9 @@ const rootReducer = (state = initialState, action) => {
               
                     
                 }):
-                state.pokemons.Sort(function(a,b){
-                    if(a.name > b.name) return -1;
-                    if(b.name > a.name) return 1;
+                state.pokemons.sort(function(a,b){
+                    if(a.name.toLowerCase()  > b.name.toLowerCase() ) return -1;
+                    if(b.name.toLowerCase() > a.name.toLowerCase() ) return 1;
                     return 0;
                 })
                 return{
@@ -66,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
                     pokemons: orderedPokemons
                 }
                 case FILTER_BY_ATTACK:
-                let orderedByAttack = action.payload === 'DESCENDENTE'?
+                let orderedByAttack = action.payload === 'Menor fuerza'?
                 state.pokemons.sort(function(a, b) {
                     if (a.attack> b.attack)return 1;    
                     if (b.attack > a.attack)return -1;
@@ -89,9 +91,13 @@ const rootReducer = (state = initialState, action) => {
                     case GET_DETAILS:
                         return {
                           ...state,
-                          allDetail: action.payload,
+                          detail: action.payload,
                         };
-                    
+                    case 'GET_CLEAN':
+                        return{
+                            ...state,
+                            detail:action.payload
+                        }
                  
         default:
             return {...state }

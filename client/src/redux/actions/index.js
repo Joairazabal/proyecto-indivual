@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const GET_ALL_POKEMONS='GET_ALL_POKEMONS'
 export const GET_TYPES='GET_TYPES'
 export const GET_POKEMONS_NAME= 'GET_POKEMONS_NAME'
@@ -10,14 +9,14 @@ export const SORT = "SORT"
 export const FILTER_BY_ATTACK= 'FILTER_BY_ATTACK'
 export const  GET_DETAILS=  "GET_DETAILS"
 
-export default function getPokemons(){
-    return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/pokemons")
-    return dispatch({
-       type: GET_ALL_POKEMONS,
-       payload: json.data 
-    })
-    }
+export function getPokemons(){
+  return async function(dispatch){
+    var json = await axios.get("http://localhost:3001/pokemons")
+return dispatch({
+   type: GET_ALL_POKEMONS,
+   payload: json.data 
+})
+}
 }
 
 export function getTypes(){
@@ -38,7 +37,7 @@ export const getPokemonsName = (name) => {
             payload: json.data,
           });
         } catch {
-          return alert("No se encontró el pokemon");
+          return alert('I didnt find the pokemon');
         }
       };
     }
@@ -71,7 +70,7 @@ export function filterByAttack(payload){
       };
     }
     export const postPokemon=(payload)=>{
-      return async function (dispatch) {
+      return async function () {
           var json = await axios.post("http://localhost:3001/pokemons",payload)
           console.log(json)
           return json
@@ -86,13 +85,60 @@ export function filterByAttack(payload){
             payload: pokeId.data,
            
           });
-          console.log(detail)
-  
+          
         } catch (error) {
           console.log(error);
         }
       };
+    
     };
-       
+    export  function getClean(){
+      return{
+        type: 'GET_CLEAN',
+        payload: []
+      }
+    }       
   
+    // export function deletePokemon(id) {
+    //   return (dispatch) => {
+    //     try {
+    //       axios
+    //         .delete('http://localhost:3001/pokemons/${id}')
+    //         .then(() => dispatch({ type: 'DELETE_POKEMON' }));
+    //     } catch (error) {
+    //       console.log(error, 'err delete');
+    //     }
+    //   };
+    // }
   
+
+    // export function getPokemons(){
+    //   return function(dispatch){
+    //   axios.get("http://localhost:3001/pokemons",{}).then((info)=>dispatch({
+    //    type: GET_ALL_POKEMONS,
+    //    payload: info.data 
+    // }))
+    // }
+    // }
+
+    // router.put('/put/:id', async (req, res) => {
+    //   const { id } = req.params;
+    //   const { name, hp, attack, defense, speed, weight, height, img, type } =
+    //     req.body;
+    //   // const pokemons = await getAllPokemon();
+    //   const toEdit = await Pokemon.update(
+    //     {
+    //       name,
+    //       hp,
+    //       attack,
+    //       defense,
+    //       speed,
+    //       weight,
+    //       height,
+    //       img,
+    //       type,
+    //     },
+    //     { where: { id } }
+    //   );
+    //   res.send('Done');
+    // });
