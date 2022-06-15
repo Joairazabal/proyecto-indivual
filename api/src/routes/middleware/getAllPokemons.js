@@ -18,11 +18,8 @@ const getApiData = async () => {
       ...nextPokemonUrl.data.results,
     ];
 
-    //Aca guardo la respuesta, es decir el array de pokemons
-    //Si no usara promise.all esto me devuelve un array de promises pending
-    //Usando este metodo, no se devuelve hasta que NO TERMINA de resolver todas las promesas
-    //A este metodo le paso el array con todos los pokemons y accedo a la prop url
-    //Con eso puedo conseguir la data de cada pokemon y guardarla en un obj
+    // promise.all espera que se completen correctamente todas las promesas dentro
+    // y despues sigue, si una es rechazada F
     const pokeApi = await Promise.all(
       allPokemonsUrls.map(async (el) => {
         let pokemon = await axios(el.url);
@@ -47,53 +44,19 @@ const getApiData = async () => {
 };
 
 const getDbData = async () => {
-  // const info = await Pokemon.findAll({
-  //   include: {
-  //     model: Tipo,
-  //     attributes: ['name'],
-  //     through: {
-  //       attributes: [],
-  //     },
-  //   },
-  // });
-  
-  // const pokemons = info.map((obj) => {
-  //   return {
-  //     name: obj.name,
-  //     hp: obj.hp,
-  //     attack: obj.attack,
-  //     defense: obj.defense,
-  //     img: obj.img,
-  //     speed: obj.speed,
-  //     createdInDb: obj.createdInDb,
-  //     id: obj.id,
-  //     height: obj.height,
-  //     weight: obj.weight,
-  //     type: obj.tipos.map((el) => el.name),
-  //   };
-  // });
-  // console.log(info, ' L78');
-  // //
-
-//   return pokemons;
 try {
   const pokemons = await Pokemon.findAll({
     include: {
       //Incluime el model Tipo
       model: Tipo,
-      //TRAEME EL ATRIBUTO NAME
+      //TRAEME EL ATRIBUTO NAME --->no es necesario
       attributes: ['name'],
-      //MEDIANTE LOS ATRIBUTOS, VA SIEMPRE, BUENA PRACTICA
+      //MEDIANTE LOS ATRIBUTOS, VA SIEMPRE, BUENA PRACTICA---> no es necesario
       through: {
         attributes: [],
       },
     },
   });
-  // console.log(
-  //   pokemons[0].tipos.map((el) => el.name),
-  //   ' LINEA 60 GETALLPOKEMONS'
-  // );
-  console.log(pokemons);
   const info = pokemons.map((obj) => {
     return {
       name: obj.name,
@@ -109,7 +72,6 @@ try {
       type: obj.tipos?.map((el) => el.name),
     };
   });
-  console.log(info, ' L78');
   return info;
 } catch (error) {
   console.log(error, ' LINEA 83 GETALLPOKEMONS');
@@ -123,11 +85,6 @@ const getAllPokemon = async () => {
   return dbPlusApi;
 };
 
-// const pokeTypes= async()=>{
-//   const tipos= await getAllPokemon()
-//   const allTypes= await tipos.map((t)=>t.type)
-//   return allTypes
-// }
 
 const pokeTypes= async()=>{
   const typesUrl = await axios.get('https://pokeapi.co/api/v2/type')
@@ -143,6 +100,7 @@ const pokeTypes= async()=>{
 const getTypesDb= async()=>{
   await pokeTypes();
   try {
+    //findAll busca todos
     const pokemonTypes= await Tipo.findAll()
     return pokemonTypes
   } catch (e) {

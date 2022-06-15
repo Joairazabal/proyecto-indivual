@@ -1,13 +1,17 @@
-
+*{
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'Nanum Gothic', sans-serif;
+}
 .container {
     background: rgba(21, 21, 19, 0.248);
-    margin: 15px;
+    margin: 2rem;
     width: 17rem;
-    border-radius: 10px;
-    display: inline-block;
+    border-radius: 1rem;
     transition: all 400ms ease;
     box-sizing: content-box;
-    min-height: 150px;
+    min-height: 18rem;
     border-color: #000000;
     border-width: 1.5px;
     border-style: solid;
@@ -15,6 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
+    justify-content: center;
 }
   .container:hover {
     box-shadow: 20px 20px 20px rgb(0, 0, 0, 0, 4);
@@ -23,31 +28,34 @@
   }
   
   .name {
-    font-size: 20px;
-    color: #000000;
+    list-style-type: none;
+    font-size:2rem;
+    color: #fff;
+    text-decoration-line: none;
     text-decoration: none;
-    padding-left: 5em;
-    
+    display: flex; 
+    flex-direction: row;
   }
   
   .typeStyle {
     list-style-type: none;
-    color: #000000;
+    font-size:1.5rem;
+    color: #fff;
     text-decoration-line: none;
     display: inline;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-family: "Merienda", cursive;
+    padding-left: 1rem;
+    padding-right: 1rem;
     text-decoration: none;
     display: flex; 
     flex-direction: row;
    
   }
   .typeStyle h2{
-    padding-left: 5px;
+    padding-left: 1rem;
   }
   .imagen{
     display:flex;
-    padding-left: 5rem;
+    justify-content: center;
+    padding-top: 1rem;
 
   }

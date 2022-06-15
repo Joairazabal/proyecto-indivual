@@ -5,6 +5,7 @@ const getById= async(id)=>{
   
  try{
   if (typeof id === 'string' && id.length > 6) {
+    //encuentra en seguna la primary key
     const db = await Pokemon.findByPk(id, { include: Tipo });
     const pokemonDb = {
       id: db.id,

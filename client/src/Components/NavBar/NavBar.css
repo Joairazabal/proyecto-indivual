@@ -1,34 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Nanum+Gothic&family=Raleway:wght@300&display=swap');
+
 *{
-    font-family: 'Raleway', sans-serif;
     margin: 0;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    
 }
-.navBar {
-    background-color: transparent;
+ .contain_nav{
+    width: 100%;
     display: flex;
-    justify-content: center;
-    justify-content: space-between;
+    justify-content: center; 
+    justify-content: space-evenly; 
     align-items: center;
-    width: 100vw;
     position: sticky;
-    top: 0;
     padding: 1.5rem 0 1.5rem 0;; 
     padding-right:0 ;
-    z-index: 1;
-   
+    z-index: 0;
+    box-sizing: border-box;
+    
 }
-a{
+
+.home {
     text-decoration: none;
-    margin-right:6rem ;
-    display: flex;
-    justify-content: space-between;
     color: #fff;
+    font-size: 1.5rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-radius: 10px;
+    transition: all 0.5s;
+    
 }
+.home:hover{
+background-color: rgb(116, 110, 110);
+  color: black;
+  border-radius: 10px;
+}
+
+.create{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+}
+.create:hover{
+    background-color: rgb(116, 110, 110);
+      color: black;
+      border-radius: 10px;
+    }
 .mid {
     display: flex;
 
 }
 .navBar h1{
     color: #FFFF;
+}
+.searchh{
+    padding-right: 0;
+    margin-right: 0;
+    
+}
+.nav_home{
+    position: sticky;
 }

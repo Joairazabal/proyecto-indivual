@@ -8,6 +8,7 @@ import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import './Home.css'
+import Footer from "../Footer/Footer.jsx";
 
 
 export default function Home() {
@@ -22,20 +23,28 @@ export default function Home() {
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = allPokemons.slice(indexOfFirstPokemon,indexOfLastPokemon);
+//ESTADOS PARA PAGINADO
+    //Me guardo la pagina actual, siempre empezamos desde la 1
+    //Seteo la cantidad de pokemons que va a haber por pagina
+    //Calculo el index del ultimo pokemon y del primero
+    //Le digo que a currentPokemons que agarre de allPokemons desde el primer pokemon hasta el ultimo calculado segun index
 
+    //EJ: lastPokemonInPage = 1*12 = 12 
+    //firstPokemonInPage = 12-12 = 0
+    //current agarra desde la pos 0 hasta la 12
+    //PAG 
+    //1 ----0----12
+    //2 ----13---25
+    //3 ----26---38
+    //4 ----39---40
   const paginado = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
   dispatch(getPokemons());
-  //  dispatch(getTypes());
   }, [dispatch]);
 
-   function handleClick(e) {
-     e.preventDefault();
-    dispatch(getPokemons());
-   }
 
   function handleFilterType(e) {
     e.preventDefault();
@@ -63,10 +72,12 @@ export default function Home() {
   return (
     
     <div className="containn">
+      
      <NavBar/>
-  
-     <div className="order">
-   <h2>Order</h2>
+     
+      <div className="order">
+     
+   <h2 className="order_title">Order</h2>
         <select onChange={e => onSelectsChange(e)} >
         <option> A-Z:</option>
             <option value="ASCENDENTE">Ascendente</option>
@@ -77,16 +88,19 @@ export default function Home() {
             <option value="Mayor fuerza">Mayor fuerza</option>
             <option value="Menor fuerza">Menor fuerza</option>
           </select>
+        
 
-        <h2>Filter</h2>
-
+      <div className="filters_home">
+        <h2 className="filter">Filter</h2>
         <select onChange={e => handleFilterCreate(e)}>
           <option value="" selected disabled>pokemons</option>
           <option value='All'>All</option>
           <option value="created">Only my Pokemons</option>
           <option value="original">Only Originals</option>
         </select>
+      
 
+      
         <select  onChange={e => handleFilterType(e)}>
         <option value="" selected disabled className="">By types</option>
           <option value="All"> All</option>
@@ -101,17 +115,18 @@ export default function Home() {
           <option value="electric"> Electric </option>
           <option value="fairy"> Fairy </option>
           </select>
-      </div>
-
-
+          </div>
+          </div>
+        <div className="contain_cards">
       <div className="cards">
-        
       {currentPokemons.length>0?currentPokemons.map(el => {
+        console.log(currentPokemons)
         return (
             <Card name={el.name} img={el.img} type={el.type} key={el.id} id={el.id} />
 
         )
       }):<div className="loading_home"><Loading/></div>}
+      </div>
       </div>
       <div className="pag">
       <Paginado
@@ -119,8 +134,10 @@ export default function Home() {
           allPokemons={allPokemons.length}
           paginado={paginado}
           currentPage={currentPage}
-        />
-        </div>
-    </div>
-  );
-}
+          />
+          </div>
+          <div className="contain_Footer">
+            <Footer/>
+            </div>
+          </div>
+  )}

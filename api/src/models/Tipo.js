@@ -2,13 +2,13 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('tipo', {
-        idTpo:{
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            unique: true,
-            allowNull: true,
-            primaryKey: true
-        },
+        // idTpo:{
+        //     type: DataTypes.UUID,
+        //     defaultValue: DataTypes.UUIDV4,
+        //     unique: true,
+        //     allowNull: true,
+        //     primaryKey: true
+        // },
         
         name: {
             type: DataTypes.ENUM(

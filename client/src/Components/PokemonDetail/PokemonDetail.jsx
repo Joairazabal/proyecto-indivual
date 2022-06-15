@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import './Detail.css'
 import Loading from "../Loading/Loading";
+import Footer from "../Footer/Footer";
 export default function Detail() {
   const dispatch = useDispatch();
   const {id}= useParams();
@@ -21,7 +22,10 @@ const myPokemon= useSelector((state)=>state.detail)
 console.log(myPokemon)
 return(
   <div className="detail">
+    
     <NavBar/>
+    
+    <div className="box_max">
     <div className="box">
      {myPokemon.type?.length>0?
     <div className="inBox">
@@ -35,7 +39,8 @@ return(
    </div>
       </div>
       <div className="detalles">
-      <h1 className="id">ID: {myPokemon.id}</h1>
+     
+      {typeof myPokemon.id === "number"?<h1 className="id">ID:{myPokemon.id}</h1>: null}
     <span className="hp">❤️Hp: {myPokemon.hp}</span>
     <span>⚔️Attack: {myPokemon.attack}</span>
     <span>  🛡️ Defense: {myPokemon.defense}</span>
@@ -47,7 +52,10 @@ return(
 }
   </div>
   </div>
-
+  <div className="footer_detail">
+  <Footer/>
+  </div>
+  </div>
 )
 
 }

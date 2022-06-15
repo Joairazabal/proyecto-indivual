@@ -1,40 +1,46 @@
 *{
     padding: 0;
     margin: 0; 
+    font-family: 'Nanum Gothic', sans-serif;
 }
 .cards{
-    justify-self: start;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    /* height: 100vh; */
-
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 .order{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 
 }
 .containn{
-    background-image: url('https://besthqwallpapers.com/Temp/6-6-2022/ash-ketchum-pikachu-art-ash-pokemon-besthqwallpapers.com-1920x1080.jpg');
+    background-image: url('https://eskipaper.com/images/cool-tumblr-wallpaper-1.jpg');
     background-size: cover;
     height: 100vh;
-    width: 100vw;
-    overflow: auto;
+    width: 100%;
+    overflow:auto;  
     display: flex;
     flex-direction: column;
     background-size: cover;
-  
+    align-items: center;
+    min-height: 100%;
 } 
 .order select{
     background: transparent;
     border-radius: 7px;
-    margin: 0;
-    padding: 0;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 2rem;
+    font-size: larger;
 }
-.containn{
-    width: 100vw;
-    /* height: 100vh; */
+.order select:hover{
+    background: #716F6F;
+    color: #111;
+}
+ option{
+    color: #1111
 }
 .types{
 padding-right: 2rem;
@@ -45,5 +51,28 @@ padding-right: 2rem;
 }
 .loading_home{
     height: 100vh;
-    width: 100%;
+     width: 100%; 
+    grid-column: 1/4;
+}
+
+.order h2{
+    color: #fff;
+    font-size: 1.5rem;
+}
+.filters_home{
+    padding-left: 5rem;
+    display: flex;
+}
+select option{
+    color:#111
+}
+.containn_cards{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100;
+}
+.contain_Footer{
+margin-top: auto;
+width: 100%;
 }

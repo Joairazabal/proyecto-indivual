@@ -10,12 +10,11 @@ export const FILTER_BY_ATTACK= 'FILTER_BY_ATTACK'
 export const  GET_DETAILS=  "GET_DETAILS"
 
 export function getPokemons(){
-  return async function(dispatch){
-    var json = await axios.get("http://localhost:3001/pokemons")
-return dispatch({
+  return function(dispatch){
+  axios.get("http://localhost:3001/pokemons",{}).then((info)=>dispatch({
    type: GET_ALL_POKEMONS,
-   payload: json.data 
-})
+   payload: info.data 
+}))
 }
 }
 
@@ -99,46 +98,4 @@ export function filterByAttack(payload){
       }
     }       
   
-    // export function deletePokemon(id) {
-    //   return (dispatch) => {
-    //     try {
-    //       axios
-    //         .delete('http://localhost:3001/pokemons/${id}')
-    //         .then(() => dispatch({ type: 'DELETE_POKEMON' }));
-    //     } catch (error) {
-    //       console.log(error, 'err delete');
-    //     }
-    //   };
-    // }
-  
 
-    // export function getPokemons(){
-    //   return function(dispatch){
-    //   axios.get("http://localhost:3001/pokemons",{}).then((info)=>dispatch({
-    //    type: GET_ALL_POKEMONS,
-    //    payload: info.data 
-    // }))
-    // }
-    // }
-
-    // router.put('/put/:id', async (req, res) => {
-    //   const { id } = req.params;
-    //   const { name, hp, attack, defense, speed, weight, height, img, type } =
-    //     req.body;
-    //   // const pokemons = await getAllPokemon();
-    //   const toEdit = await Pokemon.update(
-    //     {
-    //       name,
-    //       hp,
-    //       attack,
-    //       defense,
-    //       speed,
-    //       weight,
-    //       height,
-    //       img,
-    //       type,
-    //     },
-    //     { where: { id } }
-    //   );
-    //   res.send('Done');
-    // });

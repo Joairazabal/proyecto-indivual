@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import'./Card.css'
 
-export default function Card({ name, img, type,id }) {
+export default function Card({ name, img, type,id,attack }) {
   return(
 <div className="container">
 <Link to={`/home/${id}`}>
@@ -10,9 +10,11 @@ export default function Card({ name, img, type,id }) {
 </Link> 
 <Link to={`/home/${id}`}>
   <div className="imagen">
-<img src={img} alt="imagen" className="img" width="100px" height="100px" />
+<img src={img} alt="imagen" className="img" width="200px" height="150px" />
 </div>
 </Link>
+
+
   <div className="typeStyle">{type.map(el => (
     <h2>{el}</h2>
     ))}
