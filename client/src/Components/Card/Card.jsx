@@ -16,7 +16,7 @@ export default function Card({ name, img, type,id,attack }) {
 
 
   <div className="typeStyle">{type.map(el => (
-    <h2>{el}</h2>
+    <h2>tipe:{el}</h2>
     ))}
 </div>
 
