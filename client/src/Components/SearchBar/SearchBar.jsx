@@ -20,7 +20,7 @@ console.log(name)
   return (
     <div className="contains">
       <input
-        className="search"type="text"
+        className="search" type="text"
         onChange= {(e) => handleInputChange(e)}
         placeholder="Search pokemon..."
       />

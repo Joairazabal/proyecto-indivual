@@ -24,7 +24,7 @@ return(
   <div className="detail">
     
     <NavBar/>
-    
+    <div className="--detail">
     <div className="box_max">
     <div className="box">
      {myPokemon.type?.length>0?
@@ -54,6 +54,7 @@ return(
   </div>
   <div className="footer_detail">
   <Footer/>
+  </div>
   </div>
   </div>
 )
