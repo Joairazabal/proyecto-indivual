@@ -1,7 +1,11 @@
+*{
+    margin: 0%;
+}
 .container_footer{
 background-color: #716F6F;
-opacity: 0.5;
 display: flex;
+ bottom: 0;
+ width: 100%;
 
 }
 

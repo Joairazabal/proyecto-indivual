@@ -4,13 +4,15 @@
     top: 0;
 }
 .search{
-    background: transparent;
+    
     border-radius: 7px;
     border: 4px;
     margin: 0;
     padding-left: 0;
-    color: #fff;
+    background-color: transparent;
     font-size: 1rem;
+    border: 1px;
+       border: solid 1px rgba(152, 157, 160, 0.2);
     
 }
 .boton {
@@ -40,12 +42,14 @@
     border: solid 1px #FFF;
     
    }
-   ::placeholder{
-       color: rgba(255, 255, 255, 0.2);;
+   .search::placeholder{
+       color: #fff;
        font-size: 1rem;
        border: 1px;
        border: solid 1px rgba(152, 157, 160, 0.2);
        padding: 3px;
        border-radius: 4px;
+       
+
 
    }

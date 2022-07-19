@@ -136,8 +136,7 @@ export default function Home() {
           currentPage={currentPage}
           />
           </div>
-          <div className="contain_Footer">
+         
             <Footer/>
-            </div>
           </div>
   )}

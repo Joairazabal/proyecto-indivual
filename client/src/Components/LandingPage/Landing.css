@@ -3,6 +3,9 @@
     position: fixed;
     min-width: 100%;
     min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .video{
@@ -11,9 +14,10 @@
     height: 100vh;
     position: absolute; 
     left: 0;
+    
 }
 .contain{
-    padding-top: 8.5rem;
+   
     position: relative;
     display: flex;
     align-items: center;
